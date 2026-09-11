@@ -1,0 +1,326 @@
+{
+ "meta": {
+  "nom": "Structure des propales et decks clients Ecosys",
+  "derniere_maj": "2026-08-18",
+  "source": "Analyse de 7 decks clients reels (ENGIE AI R&D, TGI, Docaposte Fructidor, CNES CSG, Bouygues, GIFAS, Outre-Mer) + 1 propale de mission (EDF DSTID/DIPP), soit 165 + 42 slides",
+  "usage": "A lire AVANT de composer une propale ou un deck de presentation client"
+ },
+ "deux_familles_de_deck": {
+  "propale_de_mission": {
+   "exemple": "EDF DSTID/DIPP — Accompagnement a la detection assistee par l'IA",
+   "sommaire_type": [
+    "Votre contexte",
+    "Votre besoin",
+    "Notre approche pour y repondre",
+    "Notre expertise",
+    "Demarche, livrables et planning",
+    "Dispositif et profils des intervenants",
+    "Budget"
+   ],
+   "quand": "Reponse a un besoin identifie, avec un chiffrage. Le client sait ce qu'il veut.",
+   "ouverture": "Une slide EXECUTIVE SUMMARY juste apres la couverture, avec la proposition et les 3 tuiles forfait / duree / lieu."
+  },
+  "deck_de_credentials": {
+   "exemple": "ENGIE, TGI, Docaposte, CNES, Bouygues",
+   "sommaire_type": [
+    "Qui nous sommes",
+    "Nos expertises triple play",
+    "Nos clients sur 5 verticales sectorielles",
+    "Nos methodes",
+    "Nos references / cas d'usage",
+    "Contact"
+   ],
+   "quand": "Premier rendez-vous, prise de contact, elargissement de perimetre. Le client decouvre Ecosys.",
+   "proportion_references": "C'est le gros du volume : 10 slides de references sur 27 chez ENGIE, 14 sur 21 chez TGI, 9 sur 28 chez Bouygues. Un deck de credentials est essentiellement une selection dans la banque de references."
+  }
+ },
+ "convention_des_deux_bandeaux": {
+  "regle": "ATTENTION, la convention S'INVERSE selon le type de slide. C'est l'erreur la plus facile a commettre.",
+  "slide_de_discours": {
+   "concerne": "methode, conviction, offre, proposition de valeur, approche",
+   "bande_haute_y_0_40": "LE MESSAGE — une phrase qui enonce la conclusion",
+   "bande_basse_y_1_07": "LE LABEL DE SECTION — nom de rubrique",
+   "exemples": [
+    "haut: 'Nous vous aidons a rendre vos donnees operables grace a des interfaces de data visualisation' / bas: 'DU GRAPHE AUX IOC : INTEGRATED OPERATIONS CENTERS'",
+    "haut: 'Notre approche People - Process - Techno de la transformation Data & IA' / bas: 'STRATEGIE DATA & DATA GOUVERNANCE'"
+   ]
+  },
+  "slide_de_reference_client": {
+   "concerne": "cas d'usage, reference, mission passee",
+   "bande_haute_y_0_40": "LA CATEGORIE D'OFFRE — courte, 2 a 4 mots",
+   "bande_basse_y_1_07": "LA DESCRIPTION DE LA MISSION — phrase longue",
+   "exemples": [
+    "haut: 'Modelisation d'Ecosysteme' / bas: 'Analyse de la coherence du projet strategique du port...'",
+    "haut: 'Strategie Data' / bas: 'Optimisation d'un processus d'open-innovation par la donnee'"
+   ]
+  },
+  "majuscules": "30 % des labels seulement (ENGIE 45 %, CNES 55 %, Docaposte 7 %). Ce n'est pas une regle : choisir par deck et tenir de bout en bout."
+ },
+ "densite_visuelle": {
+  "photo_reelle": "50 a 85 % des slides selon le deck, mediane 76 %. Surface mediane 7 a 8 pouces carres : ce sont de vrais visuels, pas des vignettes. Le logo de pied de page ne compte pas.",
+  "schema_compose": "11 a 30 % des slides. Formes et connecteurs groupes, jamais du SmartArt.",
+  "graphique_natif": "ZERO sur les 5 decks. Ecosys n'utilise pas les graphiques PowerPoint natifs.",
+  "tableau_natif": "ZERO sur les 5 decks.",
+  "regle_a_appliquer": "Viser au moins 70 % de slides porteuses d'un visuel. Jamais plus de deux slides consecutives sans visuel. Faire tourner les variantes de photo : repeter la meme image sur tout un deck est le defaut le plus visible.",
+  "visuel_dominant": "Part des slides portant un visuel de plus de 25 pouces carres : 7 % (Bouygues), 18-25 % (ENGIE, TGI, Docaposte, CNES), 32 % (GIFAS), 35 % (Outre-Mer). CIBLE : viser le niveau GIFAS/Outre-Mer, soit environ un tiers des slides avec un visuel dominant. C'est le seul indicateur qui separe un deck plat d'un deck percutant."
+ },
+ "volume_de_texte": {
+  "caracteres_par_slide": "mediane 630 a 1040 selon le deck",
+  "blocs_de_texte_par_slide": "mediane 10 a 16",
+  "lecture": "Les slides Ecosys sont DENSES. Une slide a 3 puces de 10 mots parait vide dans ce DA. Viser 600 a 900 caracteres repartis en 10 a 15 blocs courts."
+ },
+ "blocs_corporate_recurrents": [
+  {
+   "titre": "Une entreprise et un reseau d'entreprises",
+   "vus_dans": "ENGIE, Bouygues"
+  },
+  {
+   "titre": "Pourquoi ECOSYS Group",
+   "label": "NOTRE RAISON D'ETRE",
+   "vus_dans": "ENGIE, TGI"
+  },
+  {
+   "titre": "Nos expertises triple play",
+   "label": "NOUS FOURNISSONS DES SERVICES ET DES TECHNOLOGIES POUR VOUS AIDER A PILOTER",
+   "vus_dans": "ENGIE, Docaposte, Bouygues"
+  },
+  {
+   "titre": "Nos clients sur 5 verticales sectorielles",
+   "label": "LES TERRITOIRES AU COEUR DE NOTRE STRATEGIE DE DEVELOPPEMENT",
+   "vus_dans": "ENGIE, TGI, Docaposte, Bouygues"
+  },
+  {
+   "titre": "Ecosys a concu des methodes et outils de modelisation d'ecosystemes",
+   "label": "MODELISATION ORGANIQUE & SYSTEMIQUE",
+   "vus_dans": "ENGIE, Bouygues"
+  },
+  {
+   "titre": "Plus de 200 projets realises depuis 15 ans",
+   "label": "NOS CLIENTS SUR NOS 5 SECTEURS",
+   "vus_dans": "CNES"
+  }
+ ],
+ "banque_de_references": {
+  "principe": "25 references distinctes, reutilisees d'un deck a l'autre — l'une apparait dans 4 decks sur 5. Composer un deck de credentials consiste d'abord a SELECTIONNER dans cette banque les references proches du secteur et du besoin du client, puis a les ordonner par categorie d'offre.",
+  "categories": {
+   "Modélisation d'Écosystème": 12,
+   "Stratégie Data": 10,
+   "Innovation Technologique": 2,
+   "Centre d'opération": 1
+  },
+  "references": [
+   {
+    "categorie": "Centre d'opération",
+    "mission": "Optimisation du fonctionnement d’une usine de production d’alliages de manganèse",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Innovation Technologique",
+    "mission": "Plateforme de pilotage collaboratif de l’innovation Naval Group",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Innovation Technologique",
+    "mission": "Création d’un pitch deck de présentation du projet et des études R&D réalisés par le port",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Analyse de la cohérence du projet stratégique du port, de son rôle dans le développement local, et de sa contribution aux ambitions d’acteurs clés",
+    "reutilisations": 4
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Valorisation de l’écosystème partenarial de startups françaises du CNES",
+    "reutilisations": 3
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Analyse et recommandations pour accélérer le développement de la filière",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Cadrage et déploiement d’une plateforme d'Hypervision de l’écosystème",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Cadrage d’une nouvelle offre de services pour l’intermodalité",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Orchestrer une coalition d’acteurs et concevoir une plateforme numérique de filière dédiée à la transition écologique et énergétique",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Exploration plus fluide des connexions complexes grâce aux bases graphes",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Caractérisation des liens d’intérêt entre le projet stratégique du port, son écosystème et les ambitions de la région Grand Est",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Appui tactique et stratégique au projet Shared Data Language for All",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Structurer une démarche collective pour décarboner les ensembles industriels et la mobilité autour de 2 sites pilotes en région Grand Est",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Cockpit de décarbonisation de la filière aéronautique",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Modélisation d'Écosystème",
+    "mission": "Appui à la transformation stratégique de la filière",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Optimisation d’un processus d’open-innovation par la donnée",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Accompagnement à la refonte de l’ensemble du système opérationnel",
+    "reutilisations": 2
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Définition d’une stratégie Data Groupe, standardisation et mise en œuvre de démarche de mise en gouvernance des données au sein de filiales à l’internationale",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Diagnostic, recommandations et déploiement d’une démarche de Gouvernance des données sur plusieurs filiales du Groupe",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Construction et mise en œuvre de la Stratégie Data de la Direction du Matériel",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Cartographie 360 des processus de reporting extra-financier et premières recommandations",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Etat des lieux et recommandations pour la mise en place d’un tableau de bord de pilotage des activités des services cybersécurité d’Orange",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Adapter la Note de Transition Climatique initiée sur les grands comptes aux ETI clientes du groupe",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Valoriser au mieux les données disponibles pour caractériser une filière",
+    "reutilisations": 1
+   },
+   {
+    "categorie": "Stratégie Data",
+    "mission": "Faciliter, grâce à la data, la compréhension des impacts des PME sur le capital naturel",
+    "reutilisations": 1
+   }
+  ]
+ },
+ "anatomie_slide_reference": {
+  "importance": "C'est LE gabarit le plus utilise et le plus structurant. Le bandeau 'Resultats cles' apparait sur les 7 decks analyses, 3 a 12 fois par deck. Une reference sans ce bandeau parait inachevee.",
+  "composants": [
+   {
+    "zone": "titre message",
+    "contenu": "Nom du client + nature de la mission, ex 'CNES - Observatoire de l'economie spatiale'"
+   },
+   {
+    "zone": "sous-titre",
+    "contenu": "Une ligne resumant l'objet, ex 'Modelisation de l'ecosysteme des acteurs de l'observation de la terre'"
+   },
+   {
+    "zone": "visuel dominant, moitie gauche",
+    "contenu": "CAPTURE DU LIVRABLE REEL — graphe de noeuds, cockpit, cartographie 360. Plus de 25 pouces carres. C'est ce qui fait la difference entre un deck plat et un deck visuel."
+   },
+   {
+    "zone": "colonne de texte, moitie droite",
+    "contenu": "Contexte puis objectif, avec les mots-cles en gras colore. 3 a 5 puces."
+   },
+   {
+    "zone": "bandeau 'Resultats cles', bas de slide",
+    "contenu": "3 tuiles chiffrees, ex '125 constellations / +24000 satellites / 250 acteurs'. Chiffre en gros, libelle dessous."
+   },
+   {
+    "zone": "logo client",
+    "contenu": "Bien visible, en haut a gauche du bloc de texte ou dans le visuel"
+   },
+   {
+    "zone": "pastilles de categorie, haut droite",
+    "contenu": "Tags sectoriels, optionnel"
+   },
+   {
+    "zone": "bandeau 'Partenaires solutions'",
+    "contenu": "Logos des partenaires techno (LINKURIOUS, Vectuel...), sur 1 a 3 slides par deck"
+   }
+  ]
+ },
+ "motifs_visuels_composables": {
+  "principe": "Ce qui rend les decks GIFAS et Outre-Mer nettement plus visuels que les autres n'est pas un plus grand NOMBRE d'images mais des visuels DOMINANTS : 32 et 35 % de slides portent un visuel de plus de 25 pouces carres, contre 7 a 25 % ailleurs. Ces visuels sont soit des captures de livrables reels, soit des schemas composes a la main. Les motifs ci-dessous sont ceux observes : les reproduire avec des formes et des connecteurs, jamais avec du SmartArt.",
+  "motifs": [
+   {
+    "nom": "pipeline numerote",
+    "observe": "Outre-Mer, pipeline agentique a 5 etapes",
+    "structure": "N cartes en ligne, chacune numerotee dans une pastille ronde, reliees par des fleches. Sous chaque carte un encart OUTPUT sur fond colore avec le resultat chiffre.",
+    "usage": "une chaine de traitement, une demarche sequentielle"
+   },
+   {
+    "nom": "piliers",
+    "observe": "Outre-Mer, PILLAR 1/2/3 + OUTPUT",
+    "structure": "3 colonnes titrees en bandeau colore, contenu en puces, plus un bandeau OUTPUT vert transversal en bas.",
+    "usage": "les composantes d'une offre ou d'une capacite"
+   },
+   {
+    "nom": "couches empilees",
+    "observe": "Outre-Mer, SENSE / UNDERSTAND / DECIDE",
+    "structure": "3 a 4 bandes horizontales de couleurs distinctes, chacune avec un verbe en majuscules a gauche et le detail a droite.",
+    "usage": "un modele en niveaux, une progression logique"
+   },
+   {
+    "nom": "roue d'ecosysteme",
+    "observe": "Outre-Mer et GIFAS, 'Plus de 200 projets sur 5 secteurs'",
+    "structure": "Cercle central avec le logo Ecosys, secteurs disposes en couronne, logos clients repartis autour.",
+    "usage": "panorama de clients ou de secteurs"
+   },
+   {
+    "nom": "graphe de noeuds",
+    "observe": "toutes les slides de reference",
+    "structure": "Capture d'une visualisation graphe reelle. A ne PAS redessiner : c'est une sortie d'outil, il faut l'image.",
+    "usage": "illustrer la modelisation d'ecosysteme"
+   },
+   {
+    "nom": "triangle People / Process / Techno",
+    "observe": "Outre-Mer et CNES",
+    "structure": "3 sommets etiquetes autour d'un schema central.",
+    "usage": "presenter l'approche de transformation"
+   },
+   {
+    "nom": "trois icones en ligne",
+    "observe": "Outre-Mer, 'Vos ecosystemes en 3 verticales'",
+    "structure": "3 icones alignees, titre sous chacune, accroche en couleur dessous, plus un bandeau de synthese colore.",
+    "usage": "decomposer une offre en 3 volets — c'est le gabarit enjeux du template"
+   }
+  ]
+ },
+ "motifs_emergents": {
+  "sommaire_reaffiche": "Dans le deck Outre-Mer uniquement (3 occurrences), le sommaire est reaffiche avant chaque chapitre, le chapitre courant en gras fonce et les autres en gris clair — a la place d'un intercalaire classique. Motif recent et efficace, mais PAS encore une convention etablie : absent des 6 autres decks. A proposer, pas a imposer."
+ }
+}
