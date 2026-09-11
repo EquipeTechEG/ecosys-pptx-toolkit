@@ -1,0 +1,1843 @@
+{
+ "meta": {
+  "nom": "Catalogue DA Ecosys - Jeu de slides Z/A/B/C",
+  "source_canva": {
+   "brand_kit_id": "kAHN9BsPYHY",
+   "brand_template_id": "EAHO5eH9a6o",
+   "nombre_pages": 56
+  },
+  "source_pptx_reference": "TEMPLATE_ECOSYS_V2401.pptx (72 slides, version plus riche du même DA)",
+  "derniere_maj": "2026-08-17",
+  "note_autofill": "Seuls ~19 champs autofill existent sur le brand template Canva, couvrant uniquement les pages couverture/contexte/section/budget/contact. Pour toutes les autres slides, la génération doit passer par duplication de page (merge-designs) + remplacement de texte élément par élément (perform-editing-operations), en relisant les locator_id à chaque génération via read-design (ils ne sont pas stables dans le temps).",
+  "annotation_champs_status": {
+   "tags_annotes_pptx": [
+    "annexe_benchmark",
+    "annexe_schema",
+    "annexe_synthese_entretien",
+    "budget",
+    "business_case_partenaires",
+    "business_case_simple",
+    "chantier_activites",
+    "contact",
+    "contexte",
+    "couverture",
+    "cv_expert",
+    "demarche",
+    "enjeux",
+    "equipe",
+    "etat_livrables",
+    "executive_summary",
+    "intercalaire",
+    "planning_equipe",
+    "planning_simple",
+    "reporting_flash",
+    "sommaire_grille",
+    "sommaire_liste",
+    "texte_libre",
+    "titre_texte"
+   ],
+   "tags_restants_a_annoter": [],
+   "methode": "Deux methodes selon la slide. (1) Placeholders natifs : cibler slide.placeholders[idx] via placeholder_idx, l'invite du layout sert de repere lisible. (2) Formes libres : cibler slide.shapes par shape.name, prefixe 'champ_' pour le texte et 'visuel_' pour les images. Les noms sont figes une fois pour toutes dans TEMPLATE_ECOSYS_ANNOTE.pptx — ne jamais les renommer. Certaines slides mixent les deux (titre/kicker en placeholder, corps en formes)."
+  },
+  "moteur_generation": "python-pptx sur TEMPLATE_ECOSYS_ANNOTE.pptx (bascule decidee le 17/08/2026, remplace le pipeline Canva MCP pour cette Skill)",
+  "source_pptx_annote": "TEMPLATE_ECOSYS_ANNOTE.pptx (copie de TEMPLATE_ECOSYS_V2401.pptx, 72 pages)",
+  "corrections_17_08_2026": {
+   "annotation": "80 formes renommees sur les slides 49, 53, 54, 55, 56, 58, 59, 73, 76, 81. Les 24 types du catalogue disposent desormais d'un mapping PPTX complet et verifie : les 6 types sans mapping (sommaire_grille, contexte, planning_equipe, equipe, cv_expert, business_case_simple, business_case_partenaires) et les 2 types partiels (executive_summary, etat_livrables) sont exploitables. texte_libre est documente en placeholders natifs, planning_simple complete des libelles de periode.",
+   "svgblip_reporting_flash": "3 references <asvg:svgBlip r:embed='rId5'> orphelines supprimees sur la slide 80 : le fichier etait signale comme corrompu par PowerPoint. Les icones s'affichent bien via leur PNG de repli — la limitation 'icones manquantes' est levee.",
+   "echelle_slides_importees": "Les 9 slides importees de Canva (73-81) etaient collees a l'echelle 20 pouces au lieu de 13,333 : elles debordaient du canvas de 50 %. Geometrie et tailles de police ramenees au facteur 2/3, retour a la ligne desactive sur 75 libelles courts (les metriques Montserrat de PowerPoint sont plus larges que celles de Canva et cassaient les titres).",
+   "pieds_de_page_importes": "Sur les 9 slides importees de Canva (73-81), le numero de page et le pied de page etaient des zones de texte figees affichant les numeros Canva (46 a 54) et le millesime '2024'. Remplaces par les vrais placeholders du master (idx 12 et 13, reprises de la slide 47, meme layout 'Page vierge_1') : la numerotation est un champ dynamique slidenum, elle se recalcule automatiquement dans le deck genere.",
+   "limites_restantes": "Aucun blocage connu. Deux points de vigilance : (1) sur les slides importees de Canva, les libelles courts ont le retour a la ligne desactive — un texte beaucoup plus long que l'invite debordera au lieu de passer a la ligne, verifier au rendu ; (2) la position des losanges de jalon de planning_equipe est geometrique, non pilotable par texte.",
+   "test_generation": "Premier test de generation de bout en bout (bilan brevets Arabelle x GE, 16 slides). A revele trois defauts corriges dans la foulee : (1) word_wrap=False sur les libelles courts des slides 73-81 faisait deborder le texte hors de la slide des que le contenu depassait l'invite — retour a la ligne remis partout, 28 boites de champ elargies a la place ; (2) les champs de 77 et 78 pointaient sur les en-tetes de colonne et non sur les corps de texte — remappage complet ; (3) sommaire_liste et intercalaire n'avaient aucun champ documente.",
+   "rendu_premier_deck": "Corrections apportees apres inspection visuelle du premier deck genere : les 4 libelles de tuile du gabarit budget (57) ont ete annotes pour permettre sa reutilisation en page de chiffres cles ; le logo Ecosys importe de Canva, qui doublonnait avec celui du master, a ete supprime des 9 slides 73-81 ; le tableau de etat_livrables (81) etait centre dans une boite geante et a ete recadre en haut a gauche.",
+   "point_de_vigilance_couverture": "Sur les couvertures, la boite de titre ne fait que 4,53 pouces de large et la police est tres grande : un mot long comme 'Portefeuille' se coupe en plein milieu. Le placeholder image (logo client, idx 12) bloque tout elargissement. Regle : si aucun logo client n'est fourni, supprimer ce placeholder et elargir le titre a 7,69 pouces ; sinon reduire la police du titre a 32 pt."
+  }
+ },
+ "regles_transversales": {
+  "kicker_chapitre": "Chaque slide de contenu (hors Z-génériques) porte un bandeau/sous-titre rappelant le chapitre en cours (ex: 'Votre contexte et votre besoin'). Ce texte doit être fourni par le script pour chaque slide et rester identique à l'intitulé du sommaire correspondant.",
+  "sommaire_fil_rouge": "La slide 'sommaire' est réutilisée comme intercalaire de transition à chaque changement de chapitre, avec le numéro du chapitre actif mis en évidence visuellement. Ce n'est pas juste une slide d'intro unique en début de deck.",
+  "blocs_reutilisables": "Certains blocs de contenu (argumentaire corporate 'Pourquoi Ecosys', méthodologie EIC/MCD/MCDI, vitrine vidéos cas clients) sont des standards copiés tels quels d'une propale à l'autre, indépendants du script client. Le script doit permettre de les inclure par simple référence ('inclure_bloc: argumentaire_ecosys') plutôt que de les régénérer.",
+  "variantes_photo": "Pour les types marqués variante_photo=true, les pages listées sont IDENTIQUES en mise en page ; seule la photo change. Le choix de la photo se fait soit par défaut (alternance photo/illustration), soit sur préférence explicite de l'utilisateur, soit proposé comme un choix à l'utilisateur."
+ },
+ "types": [
+  {
+   "tag": "couverture",
+   "jeu": "Z",
+   "pages_canva": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "variante_photo": true,
+   "champs_autofill": [
+    "titre_presentation",
+    "sous_titre_presentation",
+    "date",
+    "client_nom"
+   ],
+   "elements_manuels": [
+    "Nom de l'interlocuteur",
+    "Logo client"
+   ],
+   "description": "Page de garde : titre, sous-titre, date, nom interlocuteur, logo client, photo/illustration pleine hauteur à gauche, encart image à droite",
+   "champs": [],
+   "note_champs": "Cette page ne contient AUCUN champ texte natif quand elle est copiee via merge-designs (verifie sur la page source 4) : titre/sous-titre/date/client ne sont accessibles que via le mecanisme d'autofill Canva natif (create-design-from-brand-template + dataset), pas via une copie de page brute. A ne PAS traiter comme les autres tags : necessite un chemin de generation different (voir regles_transversales).",
+   "pptx": {
+    "methode": "invites natives des placeholders de layout (aucun renommage necessaire)",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "prompt_natif": "Titre"
+     },
+     {
+      "role": "sous_titre",
+      "placeholder_idx": 1,
+      "prompt_natif": "Sous-titre"
+     },
+     {
+      "role": "nom_interlocuteur",
+      "placeholder_idx": 10,
+      "prompt_natif": "Nom de l’interlocuteur"
+     },
+     {
+      "role": "logo_client",
+      "placeholder_idx": 12,
+      "prompt_natif": "Cliquez pour ajouter le logo du client"
+     },
+     {
+      "role": "date",
+      "placeholder_idx": 13,
+      "prompt_natif": "Date"
+     }
+    ],
+    "pptx_slide_defaut": 7,
+    "pptx_slides_par_theme": {
+     "Neutre": [
+      7
+     ],
+     "Logistique&mobilité": [
+      8
+     ],
+     "Logistique&mobilité2": [
+      9,
+      22,
+      35
+     ],
+     "Energie&environnement": [
+      10
+     ],
+     "Energie&environnement2": [
+      11,
+      24,
+      37
+     ],
+     "Banque&Assurance": [
+      12
+     ],
+     "Sûreté&sécurité": [
+      13
+     ],
+     "Sûreté&sécurité2": [
+      14,
+      27,
+      40
+     ],
+     "Territoires&construction": [
+      15
+     ],
+     "Territoires&construction2": [
+      16,
+      29,
+      42
+     ],
+     "ModélisationEIC": [
+      17
+     ],
+     "Data": [
+      18
+     ],
+     "Innovationtechno": [
+      19
+     ]
+    },
+    "slides_a_exclure": {
+     "slides": [
+      3,
+      4,
+      5,
+      6
+     ],
+     "raison": "layouts 'Page de garde_Clair/Bleu/Fonce/Sombre' : fonds decoratifs sans aucun placeholder (0 champ), inutilisables pour une couverture renseignee"
+    }
+   }
+  },
+  {
+   "tag": "sommaire_grille",
+   "jeu": "Z",
+   "pages_canva": [
+    14
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Sommaire en grille, 6 sections, sans photo (fond illustration graphique abstraite)",
+   "pptx": {
+    "pptx_slide": 20,
+    "methode": "invites natives des placeholders de layout",
+    "layout": "Sommaire_Neutre",
+    "champs": [
+     {
+      "role": "section1_libelle",
+      "placeholder_idx": 12,
+      "instruction": "Nom du chapitre 1"
+     },
+     {
+      "role": "section2_libelle",
+      "placeholder_idx": 13,
+      "instruction": "Nom du chapitre 2"
+     },
+     {
+      "role": "section3_libelle",
+      "placeholder_idx": 14,
+      "instruction": "Nom du chapitre 3"
+     },
+     {
+      "role": "section4_libelle",
+      "placeholder_idx": 15,
+      "instruction": "Nom du chapitre 4"
+     },
+     {
+      "role": "section5_libelle",
+      "placeholder_idx": 16,
+      "instruction": "Nom du chapitre 5"
+     },
+     {
+      "role": "section6_libelle",
+      "placeholder_idx": 17,
+      "instruction": "Nom du chapitre 6"
+     },
+     {
+      "role": "section1_numero",
+      "placeholder_idx": 18,
+      "instruction": "Numero 1 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     },
+     {
+      "role": "section2_numero",
+      "placeholder_idx": 19,
+      "instruction": "Numero 2 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     },
+     {
+      "role": "section3_numero",
+      "placeholder_idx": 20,
+      "instruction": "Numero 3 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     },
+     {
+      "role": "section4_numero",
+      "placeholder_idx": 21,
+      "instruction": "Numero 4 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     },
+     {
+      "role": "section5_numero",
+      "placeholder_idx": 22,
+      "instruction": "Numero 5 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     },
+     {
+      "role": "section6_numero",
+      "placeholder_idx": 23,
+      "instruction": "Numero 6 — deja pre-rempli, ne pas modifier sauf numerotation particuliere"
+     }
+    ],
+    "note": "Grille 2 colonnes x 3 lignes, 6 sections maximum. Au-dela de 6 chapitres, utiliser sommaire_liste. Les 6 numeros sont deja saisis (1 a 6) : ne remplir que les libelles. Pas de variante photo (fond illustration abstraite)."
+   }
+  },
+  {
+   "tag": "sommaire_liste",
+   "jeu": "Z",
+   "pages_canva": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+   ],
+   "variante_photo": true,
+   "champs_autofill": [
+    "titre_section",
+    "sous_titre_section"
+   ],
+   "description": "Sommaire en liste verticale, 5 sections, avec photo pleine hauteur à gauche. Réutilisée comme fil rouge à chaque transition de chapitre (chapitre actif mis en évidence)",
+   "champs": [
+    {
+     "role": "item1_numero",
+     "texte_placeholder": "1",
+     "instruction": "Ne pas modifier, numero de section fixe"
+    },
+    {
+     "role": "item1_titre_chapitre",
+     "texte_placeholder": "Section",
+     "instruction": "Remplacer par le nom exact du chapitre 1 (doit correspondre mot pour mot a l'intercalaire du meme chapitre)"
+    },
+    {
+     "role": "item2_numero",
+     "texte_placeholder": "2",
+     "instruction": "Ne pas modifier"
+    },
+    {
+     "role": "item2_titre_chapitre",
+     "texte_placeholder": "Section",
+     "instruction": "Nom exact du chapitre 2"
+    },
+    {
+     "role": "item3_numero",
+     "texte_placeholder": "3",
+     "instruction": "Ne pas modifier"
+    },
+    {
+     "role": "item3_titre_chapitre",
+     "texte_placeholder": "Section",
+     "instruction": "Nom exact du chapitre 3"
+    },
+    {
+     "role": "item4_numero",
+     "texte_placeholder": "4",
+     "instruction": "Ne pas modifier"
+    },
+    {
+     "role": "item4_titre_chapitre",
+     "texte_placeholder": "Section",
+     "instruction": "Nom exact du chapitre 4 si present, sinon supprimer cet item (delete_element) plutot que laisser 'Section'"
+    },
+    {
+     "role": "item5_numero",
+     "texte_placeholder": "5",
+     "instruction": "Ne pas modifier"
+    },
+    {
+     "role": "item5_titre_chapitre",
+     "texte_placeholder": "Section",
+     "instruction": "Nom exact du chapitre 5 si present, sinon supprimer"
+    }
+   ],
+   "note_champs": "Layout fixe a 5 emplacements. Si le script a moins de 5 chapitres, supprimer les items en trop plutot que laisser le placeholder 'Section'.",
+   "pptx": {
+    "methode": "invites natives des placeholders de layout (aucun renommage necessaire)",
+    "note": "6 sections disponibles sur ce layout (pas 5 comme sur Canva) ; prompts '1'..'6' pour les numeros, 'Section' pour chaque titre 5 sections maximum (5 libelles + 5 numeros). Choisir la variante selon le secteur du client ; Logistique&mobilite sert de defaut si le secteur ne correspond a aucun theme. Au-dela de 5 chapitres, basculer sur sommaire_grille (slide 20, 6 sections). ATTENTION : contrairement a sommaire_grille, les numeros ne sont PAS pre-remplis dans le template (les placeholders sont vides, seule l'invite du layout affiche 1 a 5) : il faut les saisir explicitement, sinon les pastilles restent vides. Les idx ne suivent pas l'ordre visuel : libelles 0/12/13/14/15 et numeros 10/16/17/18/19, de haut en bas.",
+    "pptx_slide_defaut": 21,
+    "pptx_slides_par_theme": {
+     "Logistique&mobilité": 21,
+     "Energie&environnement": 23,
+     "Banque&assurance": 25,
+     "Sûreté&sécurité": 26,
+     "ModélisationEIC": 30,
+     "Data": 31,
+     "Innovation": 32
+    },
+    "correction": "Le catalogue indiquait a tort la slide 20 comme exemple : la slide 20 est le layout Sommaire_Neutre a 6 sections, soit sommaire_grille. Les vrais sommaires en liste sont les layouts Sommaire_<secteur> a 5 sections.",
+    "champs": [
+     {
+      "role": "section1_libelle",
+      "placeholder_idx": 0,
+      "instruction": "Nom du chapitre 1"
+     },
+     {
+      "role": "section2_libelle",
+      "placeholder_idx": 12,
+      "instruction": "Nom du chapitre 2"
+     },
+     {
+      "role": "section3_libelle",
+      "placeholder_idx": 13,
+      "instruction": "Nom du chapitre 3"
+     },
+     {
+      "role": "section4_libelle",
+      "placeholder_idx": 14,
+      "instruction": "Nom du chapitre 4"
+     },
+     {
+      "role": "section5_libelle",
+      "placeholder_idx": 15,
+      "instruction": "Nom du chapitre 5"
+     },
+     {
+      "role": "section1_numero",
+      "placeholder_idx": 10,
+      "instruction": "Numero 1"
+     },
+     {
+      "role": "section2_numero",
+      "placeholder_idx": 16,
+      "instruction": "Numero 2"
+     },
+     {
+      "role": "section3_numero",
+      "placeholder_idx": 17,
+      "instruction": "Numero 3"
+     },
+     {
+      "role": "section4_numero",
+      "placeholder_idx": 18,
+      "instruction": "Numero 4"
+     },
+     {
+      "role": "section5_numero",
+      "placeholder_idx": 19,
+      "instruction": "Numero 5"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "intercalaire",
+   "jeu": "Z",
+   "pages_canva": [
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ],
+   "variante_photo": true,
+   "champs_autofill": [
+    "titre_section",
+    "sous_titre_section"
+   ],
+   "description": "Page de transition : numéro + titre + sous-titre de section, photo pleine hauteur à gauche",
+   "champs": [
+    {
+     "role": "numero_chapitre",
+     "texte_placeholder": "N°",
+     "instruction": "Remplacer par le numero du chapitre en cours (1, 2, 3...)"
+    },
+    {
+     "role": "titre_chapitre",
+     "texte_placeholder": "Titre",
+     "instruction": "Nom exact du chapitre, identique au libelle utilise dans le sommaire_liste"
+    },
+    {
+     "role": "sous_titre_chapitre",
+     "texte_placeholder": "Sous-titre",
+     "instruction": "Accroche courte (5-8 mots) resumant le contenu du chapitre"
+    }
+   ],
+   "pptx": {
+    "methode": "invites natives des placeholders de layout (aucun renommage necessaire)",
+    "note": "Ce layout combine numero+titre (prompt 'Section' sur le placeholder TITLE idx=0) + 5 sous-sections (prompts '1'..'5'). A verifier lequel des ~9 layouts intercalaire du jeu Z correspond exactement au tag Canva 'intercalaire' simple (N°+Titre+Sous-titre) - plusieurs variantes coexistent, prevoir un second passage d'inspection.",
+    "pptx_slide_defaut": 33,
+    "pptx_slides_par_theme": {
+     "Neutre": 33,
+     "Logistique&mobilité": 34,
+     "Energie&environnement": 36,
+     "Banque&assurance": 38,
+     "Sûreté&sécurité": 39,
+     "Territoires&construction": 41,
+     "ModélisationEIC": 43,
+     "Data": 44,
+     "Innovationtechno": 45
+    },
+    "correction": "Le catalogue indiquait a tort la slide 23 comme exemple : la slide 23 est un layout Sommaire_<secteur>. Les intercalaires sont les layouts 'Page intercalaire_<secteur>'.",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Nom du chapitre"
+     },
+     {
+      "role": "sous_titre",
+      "placeholder_idx": 1,
+      "instruction": "Sous-titre ou accroche du chapitre (optionnel)"
+     },
+     {
+      "role": "numero",
+      "placeholder_idx": 10,
+      "instruction": "Numero du chapitre, en gros caractere a gauche du titre"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "contact",
+   "jeu": "Z",
+   "pages_canva": [
+    32
+   ],
+   "variante_photo": false,
+   "champs_autofill": [
+    "contact1_nom",
+    "contact1_telephone",
+    "contact1_email",
+    "contact2_nom",
+    "contact2_telephone",
+    "contact2_email"
+   ],
+   "description": "Page de contact avec adresse Ecosys, 2 encarts contact (nom/tel/mail)",
+   "champs": [
+    {
+     "role": "adresse_ecosys",
+     "texte_placeholder": "ECOSYS Group / 9 rue Jadin / 75017 PARIS",
+     "instruction": "Fixe, ne pas modifier sauf demenagement du siege"
+    },
+    {
+     "role": "contact1_telephone",
+     "texte_placeholder": "Numero de telephone (1er bloc)",
+     "instruction": "Telephone du 1er interlocuteur"
+    },
+    {
+     "role": "contact1_email",
+     "texte_placeholder": "Adresse mail (1er bloc)",
+     "instruction": "Email du 1er interlocuteur"
+    },
+    {
+     "role": "contact2_telephone",
+     "texte_placeholder": "Numero de telephone (2e bloc)",
+     "instruction": "Telephone du 2e interlocuteur"
+    },
+    {
+     "role": "contact2_email",
+     "texte_placeholder": "Adresse mail (2e bloc)",
+     "instruction": "Email du 2e interlocuteur"
+    }
+   ],
+   "pptx": {
+    "pptx_slide": 46,
+    "methode": "invites natives des placeholders de layout (aucun renommage necessaire)",
+    "champs": [
+     {
+      "role": "contact1_telephone",
+      "placeholder_idx": 13,
+      "prompt_natif": "Numéro de téléphone"
+     },
+     {
+      "role": "contact1_email",
+      "placeholder_idx": 14,
+      "prompt_natif": "Adresse mail"
+     },
+     {
+      "role": "contact2_telephone",
+      "placeholder_idx": 18,
+      "prompt_natif": "Numéro de téléphone"
+     },
+     {
+      "role": "contact2_email",
+      "placeholder_idx": 19,
+      "prompt_natif": "Adresse mail"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "texte_libre",
+   "jeu": "Z",
+   "pages_canva": [
+    33,
+    34
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Page vierge titre + sous-titre + zone de texte libre ou schéma, sans contrainte de mise en page",
+   "champs": [
+    {
+     "role": "titre",
+     "texte_placeholder": "Titre",
+     "instruction": "Titre court de la slide (affiche en vert)"
+    },
+    {
+     "role": "sous_titre_kicker",
+     "texte_placeholder": "Sous-titre",
+     "instruction": "Rappel du chapitre en cours (kicker), identique au fil rouge"
+    },
+    {
+     "role": "texte_contenu",
+     "texte_placeholder": "Texte",
+     "instruction": "Contenu libre en une seule zone a puces ; adapte pour texte long, chiffres, ou description de schema"
+    }
+   ],
+   "pptx": {
+    "pptx_slide": 47,
+    "pptx_slide_variante": 48,
+    "methode": "invites natives des placeholders de layout",
+    "layout": "Page vierge_1 (slide 47) / Page vierge_2 (slide 48)",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre de la slide"
+     },
+     {
+      "role": "kicker",
+      "placeholder_idx": 10,
+      "instruction": "Nom du chapitre en cours (invite native : 'Sous-titre')"
+     },
+     {
+      "role": "corps",
+      "placeholder_idx": 1,
+      "instruction": "Contenu libre. Un <a:p> par puce, les puces heritent du layout"
+     }
+    ],
+    "note": "Page 100 % placeholders natifs : aucune forme a renommer. Slide 47 et 48 sont deux layouts vierges equivalents — prendre 47 par defaut, 48 si besoin d'une seconde variante dans le meme deck."
+   }
+  },
+  {
+   "tag": "contexte",
+   "jeu": "B",
+   "pages_canva": [
+    35
+   ],
+   "variante_photo": false,
+   "champs_autofill": [
+    "contexte_sous_titre",
+    "contexte_texte"
+   ],
+   "description": "Page de contexte projet, visuel réseau/data en fond",
+   "pptx": {
+    "pptx_slide": 49,
+    "methode": "mixte : placeholders natifs pour titre/kicker + renommage de formes (shape.name) pour le corps",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'Contexte')"
+     },
+     {
+      "role": "kicker",
+      "placeholder_idx": 10,
+      "instruction": "Nom du chapitre en cours"
+     },
+     {
+      "role": "accroche",
+      "shape_name": "champ_contexte_accroche",
+      "instruction": "Phrase d'accroche en gras sur le visuel sombre, 1 a 2 lignes"
+     },
+     {
+      "role": "texte",
+      "shape_name": "champ_contexte_texte",
+      "instruction": "Paragraphe de contexte, 4 a 6 lignes"
+     },
+     {
+      "role": "visuel_fond",
+      "shape_name": "visuel_contexte_fond",
+      "instruction": "Image de fond reseau/data — remplacable via le blip de la forme"
+     }
+    ],
+    "note": "Texte blanc sur visuel sombre : ne jamais y mettre de texte long, le rectangle de surimpression ne s'agrandit pas."
+   }
+  },
+  {
+   "tag": "enjeux",
+   "jeu": "B",
+   "pages_canva": [
+    36
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "3 cartes enjeux avec icône, titre et texte",
+   "champs": [
+    {
+     "role": "carte1_accroche",
+     "texte_placeholder": "Texte (gras, position haute)",
+     "instruction": "Titre court du 1er enjeu"
+    },
+    {
+     "role": "carte1_detail",
+     "texte_placeholder": "Texte (normal, sous l'accroche)",
+     "instruction": "Phrase de detail du 1er enjeu"
+    },
+    {
+     "role": "carte2_accroche",
+     "texte_placeholder": "Texte (gras, position milieu)",
+     "instruction": "Titre court du 2e enjeu"
+    },
+    {
+     "role": "carte2_detail",
+     "texte_placeholder": "Texte (normal, sous l'accroche)",
+     "instruction": "Phrase de detail du 2e enjeu"
+    },
+    {
+     "role": "carte3_accroche",
+     "texte_placeholder": "Texte (gras, position basse)",
+     "instruction": "Titre court du 3e enjeu"
+    },
+    {
+     "role": "carte3_detail",
+     "texte_placeholder": "Texte (normal, sous l'accroche)",
+     "instruction": "Phrase de detail du 3e enjeu"
+    }
+   ],
+   "note_champs": "3 cartes visuellement identiques, ordre de lecture vertical (carte 1 en haut, carte 3 en bas). Chaque carte = 1 accroche (gras 32px) + 1 detail (normal 24px).",
+   "pptx": {
+    "pptx_slide": 50,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "champs": [
+     {
+      "role": "enjeu1_accroche",
+      "shape_name": "champ_enjeu1_accroche"
+     },
+     {
+      "role": "enjeu1_detail",
+      "shape_name": "champ_enjeu1_detail"
+     },
+     {
+      "role": "enjeu2_accroche",
+      "shape_name": "champ_enjeu2_accroche"
+     },
+     {
+      "role": "enjeu2_detail",
+      "shape_name": "champ_enjeu2_detail"
+     },
+     {
+      "role": "enjeu3_accroche",
+      "shape_name": "champ_enjeu3_accroche"
+     },
+     {
+      "role": "enjeu3_detail",
+      "shape_name": "champ_enjeu3_detail"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "demarche",
+   "jeu": "B",
+   "pages_canva": [
+    37
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "4 étapes de démarche/méthodologie en frise horizontale (État des lieux > Diagnostic > Recommandations > Mise en œuvre)",
+   "champs": [
+    {
+     "role": "etape1_texte",
+     "texte_placeholder": "Texte (sous 'Etat des lieux')",
+     "instruction": "Description de l'etape 1. Le libelle 'Etat des lieux' est FIXE (methodologie Ecosys), ne pas le renommer"
+    },
+    {
+     "role": "etape2_texte",
+     "texte_placeholder": "Texte (sous 'Diagnostic')",
+     "instruction": "Description de l'etape 2. Libelle 'Diagnostic' fixe"
+    },
+    {
+     "role": "etape3_texte",
+     "texte_placeholder": "Texte (sous 'Recommandations')",
+     "instruction": "Description de l'etape 3. Libelle 'Recommandations' fixe"
+    },
+    {
+     "role": "etape4_texte",
+     "texte_placeholder": "Texte (sous 'Mise en œuvre')",
+     "instruction": "Description de l'etape 4. Libelle 'Mise en œuvre' fixe"
+    }
+   ],
+   "note_champs": "Les 4 libelles d'etape (Etat des lieux/Diagnostic/Recommandations/Mise en œuvre) sont la methodologie standard Ecosys : NE JAMAIS les renommer, remplir uniquement les zones de texte de description sous chacun.",
+   "pptx": {
+    "pptx_slide": 51,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "champs": [
+     {
+      "role": "etape_etatdeslieux_texte",
+      "shape_name": "champ_etape_etatdeslieux_texte",
+      "instruction": "Libelle 'Etat des lieux' FIXE, ne pas renommer"
+     },
+     {
+      "role": "etape_diagnostic_texte",
+      "shape_name": "champ_etape_diagnostic_texte",
+      "instruction": "Libelle 'Diagnostic' FIXE"
+     },
+     {
+      "role": "etape_recommandations_texte",
+      "shape_name": "champ_etape_recommandations_texte",
+      "instruction": "Libelle 'Recommandations' FIXE"
+     },
+     {
+      "role": "etape_miseenoeuvre_texte",
+      "shape_name": "champ_etape_miseenoeuvre_texte",
+      "instruction": "Libelle 'Mise en oeuvre' FIXE"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "chantier_activites",
+   "jeu": "B",
+   "pages_canva": [
+    38
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Chantier détaillé : objectifs (encart) + 3 activités avec livrables associés",
+   "pptx": {
+    "pptx_slide": 52,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "champs": [
+     {
+      "role": "objectifs_liste",
+      "shape_name": "champ_objectifs_liste"
+     },
+     {
+      "role": "activite1_texte",
+      "shape_name": "champ_activite1_texte"
+     },
+     {
+      "role": "activite1_livrable",
+      "shape_name": "champ_activite1_livrable"
+     },
+     {
+      "role": "activite2_texte",
+      "shape_name": "champ_activite2_texte"
+     },
+     {
+      "role": "activite2_livrable",
+      "shape_name": "champ_activite2_livrable"
+     },
+     {
+      "role": "activite3_texte",
+      "shape_name": "champ_activite3_texte"
+     },
+     {
+      "role": "activite3_livrable",
+      "shape_name": "champ_activite3_livrable"
+     }
+    ]
+   }
+  },
+  {
+   "tag": "planning_simple",
+   "jeu": "B",
+   "pages_canva": [
+    39
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Planning type Gantt simple : étapes/lots/chantiers x mois, sans détail équipe",
+   "pptx": {
+    "pptx_slide": 53,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "champs": [
+     {
+      "role": "lot1_titre",
+      "shape_name": "champ_lot1_titre"
+     },
+     {
+      "role": "lot2_titre",
+      "shape_name": "champ_lot2_titre"
+     },
+     {
+      "role": "lot3_titre",
+      "shape_name": "champ_lot3_titre"
+     },
+     {
+      "role": "lot4_titre",
+      "shape_name": "champ_lot4_titre"
+     },
+     {
+      "role": "lot5_titre",
+      "shape_name": "champ_lot5_titre"
+     },
+     {
+      "role": "ligne_pilotage",
+      "shape_name": "champ_ligne_pilotage_titre",
+      "instruction": "Libelle de la ligne de pilotage (par defaut 'Pilotage')"
+     },
+     {
+      "role": "periode1_libelle",
+      "shape_name": "champ_periode1_libelle",
+      "instruction": "Libelle de la colonne 1 (par defaut 'Mois 1')"
+     },
+     {
+      "role": "periode2_libelle",
+      "shape_name": "champ_periode2_libelle",
+      "instruction": "Libelle de la colonne 2 (par defaut 'Mois 2')"
+     },
+     {
+      "role": "periode3_libelle",
+      "shape_name": "champ_periode3_libelle",
+      "instruction": "Libelle de la colonne 3 (par defaut 'Mois 3')"
+     },
+     {
+      "role": "periode4_libelle",
+      "shape_name": "champ_periode4_libelle",
+      "instruction": "Libelle de la colonne 4 (par defaut 'Mois 4')"
+     },
+     {
+      "role": "periode5_libelle",
+      "shape_name": "champ_periode5_libelle",
+      "instruction": "Libelle de la colonne 5 (par defaut 'Mois 5')"
+     }
+    ],
+    "note": "Mois 1-5 non renommes (en-tetes fixes) ; si duree != 5 mois, ajustement manuel necessaire"
+   }
+  },
+  {
+   "tag": "planning_equipe",
+   "jeu": "B",
+   "pages_canva": [
+    40
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Planning type Gantt avec bloc kickoff/équipe additionnel",
+   "champs": [
+    {
+     "role": "kickoff_label",
+     "texte_placeholder": "Kickoff",
+     "instruction": "Marqueur visuel de demarrage, generalement garde tel quel"
+    },
+    {
+     "role": "lot1_titre",
+     "texte_placeholder": "Etape / Lot / Chantier (1re occurrence)",
+     "instruction": "Nom du 1er lot/chantier du planning"
+    },
+    {
+     "role": "lot2_titre",
+     "texte_placeholder": "Etape / Lot / Chantier (2e occurrence)",
+     "instruction": "Nom du 2e lot/chantier"
+    },
+    {
+     "role": "lot3_titre",
+     "texte_placeholder": "Etape / Lot / Chantier (3e occurrence)",
+     "instruction": "Nom du 3e lot/chantier"
+    },
+    {
+     "role": "lot4_titre",
+     "texte_placeholder": "Etape / Lot / Chantier (4e occurrence)",
+     "instruction": "Nom du 4e lot/chantier"
+    },
+    {
+     "role": "mois_entetes",
+     "texte_placeholder": "Mois 1 a Mois 5",
+     "instruction": "En-tetes de mois fixes a 5 ; si la mission dure plus ou moins longtemps, ajuster le nombre de colonnes (necessite resize/duplication d'element, cas non trivial a anticiper)"
+    }
+   ],
+   "pptx": {
+    "pptx_slide": 54,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'Planning')"
+     },
+     {
+      "role": "ligne_pilotage",
+      "shape_name": "champ_ligne_pilotage_titre",
+      "instruction": "Libelle de la ligne de pilotage (par defaut 'Pilotage')"
+     },
+     {
+      "role": "lot1_titre",
+      "shape_name": "champ_lot1_titre",
+      "instruction": "Libelle de l'etape / lot / chantier 1"
+     },
+     {
+      "role": "lot2_titre",
+      "shape_name": "champ_lot2_titre",
+      "instruction": "Libelle de l'etape / lot / chantier 2"
+     },
+     {
+      "role": "lot3_titre",
+      "shape_name": "champ_lot3_titre",
+      "instruction": "Libelle de l'etape / lot / chantier 3"
+     },
+     {
+      "role": "lot4_titre",
+      "shape_name": "champ_lot4_titre",
+      "instruction": "Libelle de l'etape / lot / chantier 4"
+     },
+     {
+      "role": "periode1_libelle",
+      "shape_name": "champ_periode1_libelle",
+      "instruction": "Libelle de la colonne 1 (par defaut 'Mois 1')"
+     },
+     {
+      "role": "periode2_libelle",
+      "shape_name": "champ_periode2_libelle",
+      "instruction": "Libelle de la colonne 2 (par defaut 'Mois 2')"
+     },
+     {
+      "role": "periode3_libelle",
+      "shape_name": "champ_periode3_libelle",
+      "instruction": "Libelle de la colonne 3 (par defaut 'Mois 3')"
+     },
+     {
+      "role": "periode4_libelle",
+      "shape_name": "champ_periode4_libelle",
+      "instruction": "Libelle de la colonne 4 (par defaut 'Mois 4')"
+     },
+     {
+      "role": "periode5_libelle",
+      "shape_name": "champ_periode5_libelle",
+      "instruction": "Libelle de la colonne 5 (par defaut 'Mois 5')"
+     },
+     {
+      "role": "periode6_libelle",
+      "shape_name": "champ_periode6_libelle",
+      "instruction": "Libelle de la colonne 6 (par defaut 'Mois 6')"
+     },
+     {
+      "role": "jalon_kickoff",
+      "shape_name": "champ_jalon_kickoff",
+      "instruction": "Libelle du jalon de depart (par defaut 'Kickoff')"
+     },
+     {
+      "role": "annotation_jalon",
+      "shape_name": "champ_annotation_jalon",
+      "instruction": "Annotation libre a droite du planning, 2 a 3 lignes max"
+     }
+    ],
+    "note": "Planning jalonne (traits + losanges de jalon), a la difference de planning_simple qui est un Gantt a barres. 4 lignes de lots + 1 ligne de pilotage, 6 colonnes de periode dont la 6e est etroite. ATTENTION : cette slide n'a PAS de placeholder sous-titre (idx 10 absent) — pas de kicker de chapitre possible. La position des losanges de jalon est geometrique et non parametrable par texte : pour deplacer un jalon il faut deplacer les formes 'Google Shape;...' correspondantes."
+   }
+  },
+  {
+   "tag": "equipe",
+   "jeu": "B",
+   "pages_canva": [
+    41
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Organigramme équipe projet Ecosys (rôles, % ETP) en miroir de l'équipe client (sponsor, interfaces métier/IT)",
+   "pptx": {
+    "pptx_slide": 55,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'Equipe')"
+     },
+     {
+      "role": "kicker",
+      "placeholder_idx": 10,
+      "instruction": "Nom du chapitre en cours"
+     },
+     {
+      "role": "ecosys1_nom_poste",
+      "shape_name": "champ_ecosys1_nom_poste",
+      "instruction": "2 paragraphes : paragraphe 1 = Prenom NOM, paragraphe 2 = intitule de poste. Ne pas fusionner en un seul paragraphe."
+     },
+     {
+      "role": "ecosys1_roles",
+      "shape_name": "champ_ecosys1_roles",
+      "instruction": "Liste des roles/responsabilites, 1 <a:p> par role, 2 a 3 max"
+     },
+     {
+      "role": "ecosys1_etp",
+      "shape_name": "champ_ecosys1_etp",
+      "instruction": "Pastille de charge, format '30 % ETP'"
+     },
+     {
+      "role": "ecosys2_nom_poste",
+      "shape_name": "champ_ecosys2_nom_poste",
+      "instruction": "2 paragraphes : paragraphe 1 = Prenom NOM, paragraphe 2 = intitule de poste. Ne pas fusionner en un seul paragraphe."
+     },
+     {
+      "role": "ecosys2_roles",
+      "shape_name": "champ_ecosys2_roles",
+      "instruction": "Liste des roles/responsabilites, 1 <a:p> par role, 2 a 3 max"
+     },
+     {
+      "role": "ecosys2_etp",
+      "shape_name": "champ_ecosys2_etp",
+      "instruction": "Pastille de charge, format '30 % ETP'"
+     },
+     {
+      "role": "ecosys3_nom_poste",
+      "shape_name": "champ_ecosys3_nom_poste",
+      "instruction": "2 paragraphes : paragraphe 1 = Prenom NOM, paragraphe 2 = intitule de poste. Ne pas fusionner en un seul paragraphe."
+     },
+     {
+      "role": "ecosys3_roles",
+      "shape_name": "champ_ecosys3_roles",
+      "instruction": "Liste des roles/responsabilites, 1 <a:p> par role, 2 a 3 max"
+     },
+     {
+      "role": "ecosys3_etp",
+      "shape_name": "champ_ecosys3_etp",
+      "instruction": "Pastille de charge, format '30 % ETP'"
+     },
+     {
+      "role": "ecosys4_nom_poste",
+      "shape_name": "champ_ecosys4_nom_poste",
+      "instruction": "2 paragraphes : paragraphe 1 = Prenom NOM, paragraphe 2 = intitule de poste. Ne pas fusionner en un seul paragraphe."
+     },
+     {
+      "role": "ecosys4_roles",
+      "shape_name": "champ_ecosys4_roles",
+      "instruction": "Liste des roles/responsabilites, 1 <a:p> par role, 2 a 3 max"
+     },
+     {
+      "role": "ecosys4_etp",
+      "shape_name": "champ_ecosys4_etp",
+      "instruction": "Pastille de charge, format '30 % ETP'"
+     },
+     {
+      "role": "client_logo_texte",
+      "shape_name": "champ_client_logo_texte",
+      "instruction": "Texte de la pastille logo client — remplacer par le vrai logo si dispo"
+     },
+     {
+      "role": "client_groupe1_titre",
+      "shape_name": "champ_client_groupe1_titre",
+      "instruction": "Titre du 1er groupe cote client (par defaut 'Equipe metier')"
+     },
+     {
+      "role": "client_groupe2_titre",
+      "shape_name": "champ_client_groupe2_titre",
+      "instruction": "Titre du 2e groupe cote client (par defaut 'Equipe IT')"
+     },
+     {
+      "role": "client1_nom_role",
+      "shape_name": "champ_client1_nom_role",
+      "instruction": "2 paragraphes : nom, puis role. Rattache au groupe 1"
+     },
+     {
+      "role": "client2_nom_role",
+      "shape_name": "champ_client2_nom_role",
+      "instruction": "2 paragraphes : nom, puis role. Rattache au groupe 1"
+     },
+     {
+      "role": "client3_nom_role",
+      "shape_name": "champ_client3_nom_role",
+      "instruction": "2 paragraphes : nom, puis role. Rattache au groupe 2 (Equipe IT)"
+     }
+    ],
+    "note": "Organigramme Ecosys a gauche (4 intervenants max, relies par des connecteurs) + carte client a droite (3 interlocuteurs max, repartis en 2 groupes). Ordre hierarchique des 4 profils Ecosys : 1 = haut (direction de projet), 2 = milieu, 3 et 4 = bas (meme niveau). Si moins de 4 intervenants, supprimer les blocs excedentaires en entier (texte + ellipse + pastille ETP + connecteur), pas seulement leur texte."
+   }
+  },
+  {
+   "tag": "cv_expert",
+   "jeu": "B",
+   "pages_canva": [
+    42
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "CV détaillé d'un profil : expériences significatives, formation, langues, expertises",
+   "pptx": {
+    "pptx_slide": 56,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'CV')"
+     },
+     {
+      "role": "kicker",
+      "placeholder_idx": 10,
+      "instruction": "Nom du chapitre en cours"
+     },
+     {
+      "role": "nom_poste",
+      "shape_name": "champ_cv_nom_poste",
+      "instruction": "2 paragraphes : Prenom NOM, puis intitule de poste"
+     },
+     {
+      "role": "experiences_col1",
+      "shape_name": "champ_cv_experiences_col1",
+      "instruction": "Experiences 1 a 3. Motif repete : 1 <a:p> 'Annee', 1 <a:p> nom de l'experience en gras, puis 1 a 2 <a:p> de description"
+     },
+     {
+      "role": "experiences_col2",
+      "shape_name": "champ_cv_experiences_col2",
+      "instruction": "Experiences 4 a 6, meme motif que la colonne 1"
+     },
+     {
+      "role": "formations",
+      "shape_name": "champ_cv_formations",
+      "instruction": "Motif : 'Annee', nom du diplome, description. 2 formations max"
+     },
+     {
+      "role": "langues",
+      "shape_name": "champ_cv_langues",
+      "instruction": "Motif : langue puis niveau, 1 <a:p> chacun. 2 langues max"
+     },
+     {
+      "role": "expertises_sectorielles",
+      "shape_name": "champ_cv_expertises_sectorielles",
+      "instruction": "Expertises sectorielles, liste courte separee par des virgules"
+     },
+     {
+      "role": "expertises_gestion",
+      "shape_name": "champ_cv_expertises_gestion",
+      "instruction": "Expertises gestion de projet, liste courte"
+     },
+     {
+      "role": "expertises_outils",
+      "shape_name": "champ_cv_expertises_outils",
+      "instruction": "Outils / tech / code, liste courte"
+     },
+     {
+      "role": "photo",
+      "shape_name": "visuel_cv_photo",
+      "instruction": "Photo de l'intervenant, cadre circulaire"
+     }
+    ],
+    "note": "Une slide par expert. Les 4 libelles de section (Formation, Experiences significatives, Expertises, Langues parlees) sont du decor fixe : ne pas les modifier. Zone experiences tres contrainte en hauteur (2,22 pouces par colonne) : 6 experiences maximum au total, descriptions d'une ligne."
+   }
+  },
+  {
+   "tag": "budget",
+   "jeu": "B",
+   "pages_canva": [
+    43
+   ],
+   "variante_photo": false,
+   "champs_autofill": [
+    "budget_montant",
+    "duree_mois",
+    "lieu_execution",
+    "conditions_facturation"
+   ],
+   "description": "Conditions budgétaires : forfait, durée, lieu, conditions de facturation. Variante EDF observée : peut être fusionnée avec l'executive summary sur une seule slide",
+   "champs": [
+    {
+     "role": "montant_valeur",
+     "texte_placeholder": "XX XXX € (dans le bloc 'Le montant total est de')",
+     "instruction": "Remplacer UNIQUEMENT le montant via find_and_replace_text pour preserver le formatage (intro + gros chiffre)"
+    },
+    {
+     "role": "duree_valeur",
+     "texte_placeholder": "XXX mois",
+     "instruction": "Remplacer par la duree reelle via find_and_replace_text"
+    },
+    {
+     "role": "lieu_valeur",
+     "texte_placeholder": "Paris",
+     "instruction": "Remplacer par le lieu d'execution reel"
+    },
+    {
+     "role": "conditions_facturation_liste",
+     "texte_placeholder": "xx% du montant a la commande / Xx% a tel jalon / Xx% a la fin de la prestation / Paiement a 30 jours fin de mois",
+     "instruction": "Adapter aux vraies conditions de facturation du client"
+    }
+   ],
+   "pptx": {
+    "pptx_slide": 57,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "champs": [
+     {
+      "role": "montant_valeur",
+      "shape_name": "champ_montant_valeur",
+      "instruction": "Contient 'Le montant total est de \\nXX XXX €' - remplacer uniquement la 2e ligne"
+     },
+     {
+      "role": "duree_valeur",
+      "shape_name": "champ_duree_valeur"
+     },
+     {
+      "role": "lieu_valeur",
+      "shape_name": "champ_lieu_valeur"
+     },
+     {
+      "role": "conditions_facturation_liste",
+      "shape_name": "champ_conditions_facturation_liste"
+     },
+     {
+      "role": "tuile1_label",
+      "shape_name": "champ_tuile1_label",
+      "instruction": "Libelle de la tuile 1 (defaut 'Forfait propose')"
+     },
+     {
+      "role": "tuile2_label",
+      "shape_name": "champ_tuile2_label",
+      "instruction": "Libelle de la tuile 2 (defaut 'Duree previsionnelle')"
+     },
+     {
+      "role": "tuile3_label",
+      "shape_name": "champ_tuile3_label",
+      "instruction": "Libelle de la tuile 3 (defaut 'Lieu d'execution')"
+     },
+     {
+      "role": "tuile4_label",
+      "shape_name": "champ_tuile4_label",
+      "instruction": "Libelle de la tuile 4 (defaut 'Conditions')"
+     },
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre de la page (defaut 'Budget')"
+     }
+    ],
+    "reutilisation": "Ce gabarit — 4 tuiles a icone sur bandeau photo — est le meilleur support du jeu pour une page de CHIFFRES CLES, au-dela du seul budget. Les 4 libelles (champ_tuileN_label) et les 4 valeurs (champ_montant_valeur, champ_duree_valeur, champ_lieu_valeur, champ_conditions_facturation_liste, dans cet ordre de gauche a droite) sont librement reecrivables. Preferer ce gabarit a annexe_benchmark quand il s'agit d'afficher 3 ou 4 grands nombres : les tuiles KPI de annexe_benchmark sont dimensionnees pour 3 caracteres et debordent au-dela.",
+    "note_valeurs_gauche_a_droite": [
+     "champ_montant_valeur",
+     "champ_duree_valeur",
+     "champ_lieu_valeur",
+     "champ_conditions_facturation_liste"
+    ]
+   }
+  },
+  {
+   "tag": "business_case_simple",
+   "jeu": "A",
+   "pages_canva": [
+    44
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Cas client chiffré : enjeux / notre approche / bénéfices, sans logos partenaires",
+   "pptx": {
+    "pptx_slide": 58,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'BCASE')"
+     },
+     {
+      "role": "sous_titre",
+      "placeholder_idx": 10,
+      "instruction": "Nom du cas client / du projet (ex: '5G OPEN-ROAD')"
+     },
+     {
+      "role": "col1_label",
+      "shape_name": "champ_bcase_col1_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col1_accroche",
+      "shape_name": "champ_bcase_col1_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col1_liste",
+      "shape_name": "champ_bcase_col1_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     },
+     {
+      "role": "col2_label",
+      "shape_name": "champ_bcase_col2_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col2_accroche",
+      "shape_name": "champ_bcase_col2_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col2_liste",
+      "shape_name": "champ_bcase_col2_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     },
+     {
+      "role": "col3_label",
+      "shape_name": "champ_bcase_col3_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col3_accroche",
+      "shape_name": "champ_bcase_col3_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col3_liste",
+      "shape_name": "champ_bcase_col3_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     }
+    ],
+    "note": "Reference client en 3 colonnes egales. Chaque colonne est un Groupe PowerPoint contenant 3 formes : le rectangle de fond porte le corps de texte, plus un label et une accroche. Parcourir les groupes recursivement pour atteindre les champs."
+   }
+  },
+  {
+   "tag": "business_case_partenaires",
+   "jeu": "A",
+   "pages_canva": [
+    45
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Identique à business_case_simple + colonne logos des partenaires/clients du projet cité en exemple",
+   "pptx": {
+    "pptx_slide": 59,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "placeholder_idx": 0,
+      "instruction": "Titre (par defaut 'BCASE')"
+     },
+     {
+      "role": "sous_titre",
+      "placeholder_idx": 10,
+      "instruction": "Nom du cas client"
+     },
+     {
+      "role": "col1_label",
+      "shape_name": "champ_bcase_col1_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col1_accroche",
+      "shape_name": "champ_bcase_col1_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col1_liste",
+      "shape_name": "champ_bcase_col1_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     },
+     {
+      "role": "col2_label",
+      "shape_name": "champ_bcase_col2_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col2_accroche",
+      "shape_name": "champ_bcase_col2_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col2_liste",
+      "shape_name": "champ_bcase_col2_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     },
+     {
+      "role": "col3_label",
+      "shape_name": "champ_bcase_col3_label",
+      "instruction": "Libelle de la colonne (defauts : 1='Les enjeux', 2='Notre approche', 3='Les benefices')"
+     },
+     {
+      "role": "col3_accroche",
+      "shape_name": "champ_bcase_col3_accroche",
+      "instruction": "Accroche en gras vert, 1 a 2 lignes"
+     },
+     {
+      "role": "col3_liste",
+      "shape_name": "champ_bcase_col3_liste",
+      "instruction": "Corps de la colonne, 1 <a:p> par puce, 4 a 5 puces max. ATTENTION : cette forme est le rectangle de fond de la colonne, son texte est imbrique dans un Groupe PowerPoint"
+     },
+     {
+      "role": "partenaires_label",
+      "shape_name": "champ_bcase_partenaires_label",
+      "instruction": "Titre de la 4e colonne (par defaut 'Les partenaires')"
+     },
+     {
+      "role": "logo_partenaire1",
+      "shape_name": "visuel_partenaire1",
+      "instruction": "Logo du partenaire 1 (de haut en bas), a remplacer par le vrai logo"
+     },
+     {
+      "role": "logo_partenaire2",
+      "shape_name": "visuel_partenaire2",
+      "instruction": "Logo du partenaire 2 (de haut en bas), a remplacer par le vrai logo"
+     },
+     {
+      "role": "logo_partenaire3",
+      "shape_name": "visuel_partenaire3",
+      "instruction": "Logo du partenaire 3 (de haut en bas), a remplacer par le vrai logo"
+     },
+     {
+      "role": "logo_partenaire4",
+      "shape_name": "visuel_partenaire4",
+      "instruction": "Logo du partenaire 4 (de haut en bas), a remplacer par le vrai logo"
+     }
+    ],
+    "note": "Variante de business_case_simple avec une 4e colonne plus etroite pour les logos partenaires (4 emplacements). Les 3 colonnes de contenu sont plus etroites que dans la version simple : reduire le texte d'environ 20 %."
+   }
+  },
+  {
+   "tag": "titre_texte",
+   "jeu": "B",
+   "pages_canva": [
+    46,
+    47,
+    48
+   ],
+   "variante_photo": false,
+   "champs_autofill": [
+    "titre_section",
+    "sous_titre_section",
+    "texte_section"
+   ],
+   "description": "Slide générique titre + sous-titre + texte/liste à puces, avec option encart photo à droite (variante 46) ou pleine largeur (variantes 47/48, quasi-doublons à fusionner)",
+   "pptx": {
+    "pptx_slides": {
+     "variant_avec_photo": 73,
+     "variant_simple_1": 74,
+     "variant_simple_2": 75
+    },
+    "methode": "renommage de formes (shape.name), importees depuis Canva le 17/08/2026 (absentes du master PPTX d'origine)",
+    "champs": [
+     {
+      "role": "titre",
+      "shape_name": "champ_titre"
+     },
+     {
+      "role": "sous_titre",
+      "shape_name": "champ_sous_titre"
+     },
+     {
+      "role": "texte_corps",
+      "shape_name": "champ_texte_corps",
+      "instruction": "Present uniquement sur les variantes 74/75, absent sur 73 (bullet imbrique dans un groupe, non encore annote)"
+     },
+     {
+      "role": "encadre_texte",
+      "shape_name": "champ_encadre_texte",
+      "instruction": "Bloc navy de mise en exergue, bas de page. UNIQUEMENT sur la variante avec photo (slide 73) : 1 a 2 puces, texte blanc"
+     }
+    ],
+    "champs_par_variante": {
+     "73_avec_photo": [
+      "champ_titre",
+      "champ_sous_titre",
+      "champ_texte_corps",
+      "champ_encadre_texte"
+     ],
+     "74_simple": [
+      "champ_titre",
+      "champ_sous_titre",
+      "champ_texte_corps"
+     ],
+     "75_simple": [
+      "champ_titre",
+      "champ_sous_titre",
+      "champ_texte_corps"
+     ]
+    },
+    "note": "3 variantes. La 73 porte une photo pleine hauteur a droite et un bloc navy de mise en exergue en plus du corps. Les 74 et 75 sont des pages de texte simples, interchangeables."
+   }
+  },
+  {
+   "tag": "executive_summary",
+   "jeu": "B",
+   "pages_canva": [
+    49
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "3 colonnes de synthèse (executive summary). Peut fusionner avec budget_montant/duree_mois/lieu_execution sur variante EDF",
+   "pptx": {
+    "pptx_slide": 76,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx — les champs sont imbriques dans des Groupes PowerPoint, parcourir recursivement shape.shapes",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "shape_name": "champ_titre",
+      "instruction": "Titre (par defaut 'Executive summary')"
+     },
+     {
+      "role": "colonne1_texte",
+      "shape_name": "champ_colonne1_texte",
+      "instruction": "Colonne de gauche, fond navy, texte BLANC. Message principal. 1 <a:p> par puce, 4 a 5 puces max"
+     },
+     {
+      "role": "colonne2_texte",
+      "shape_name": "champ_colonne2_texte",
+      "instruction": "Colonne du milieu, fond gris clair, texte fonce. Colonne etroite"
+     },
+     {
+      "role": "colonne3_texte",
+      "shape_name": "champ_colonne3_texte",
+      "instruction": "Colonne de droite, fond gris clair, la plus large"
+     }
+    ],
+    "note": "Les 3 colonnes ont des largeurs differentes (3,42 / 3,08 / 4,86 pouces) : repartir le texte en consequence, le plus dense dans la colonne 3. La colonne 1 est en texte blanc sur navy — ne jamais y mettre de texte fonce."
+   }
+  },
+  {
+   "tag": "annexe_synthese_entretien",
+   "jeu": "B",
+   "pages_canva": [
+    50
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Annexe : 3 colonnes synthèse d'entretien",
+   "pptx": {
+    "pptx_slide": 77,
+    "methode": "renommage de formes (shape.name)",
+    "champs": [
+     {
+      "role": "numero_annexe",
+      "shape_name": "champ_numero_annexe",
+      "instruction": "Mention 'ANNEXE N°_' : la renseigner en annexe, la VIDER si la page sert dans le corps du deck — et dans ce cas recaler champ_titre_annexe a x=0,91 pouce, sinon le titre reste decale vers la droite"
+     },
+     {
+      "role": "titre_annexe",
+      "shape_name": "champ_titre_annexe",
+      "instruction": "Titre de la page"
+     },
+     {
+      "role": "colonne1_titre",
+      "shape_name": "champ_colonne1_titre",
+      "instruction": "En-tete de la colonne 1 (une ligne courte)"
+     },
+     {
+      "role": "colonne1_texte",
+      "shape_name": "champ_colonne1_texte",
+      "instruction": "Corps de la colonne 1, 1 <a:p> par puce, imbrique dans un Groupe"
+     },
+     {
+      "role": "colonne2_titre",
+      "shape_name": "champ_colonne2_titre",
+      "instruction": "En-tete de la colonne 2"
+     },
+     {
+      "role": "colonne2_texte",
+      "shape_name": "champ_colonne2_texte",
+      "instruction": "Corps de la colonne 2"
+     },
+     {
+      "role": "colonne3_titre",
+      "shape_name": "champ_colonne3_titre",
+      "instruction": "En-tete de la colonne 3"
+     },
+     {
+      "role": "colonne3_texte",
+      "shape_name": "champ_colonne3_texte",
+      "instruction": "Corps de la colonne 3"
+     }
+    ],
+    "note": "3 colonnes egales. ATTENTION : chaque colonne a DEUX champs, un en-tete court (champ_colonneN_titre, hors Groupe) et un corps (champ_colonneN_texte, imbrique dans un Groupe). Le corps mesure 3,74 x 4,87 pouces, soit environ 8 puces courtes."
+   }
+  },
+  {
+   "tag": "annexe_benchmark",
+   "jeu": "B",
+   "pages_canva": [
+    51
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Annexe : benchmark avec KPI et fiche produit/entreprise",
+   "pptx": {
+    "pptx_slide": 78,
+    "methode": "renommage de formes (shape.name)",
+    "champs": [
+     {
+      "role": "numero_annexe",
+      "shape_name": "champ_numero_annexe",
+      "instruction": "Mention 'ANNEXE N°_' : la renseigner en annexe, la VIDER si la page est utilisee dans le corps du deck"
+     },
+     {
+      "role": "titre_annexe",
+      "shape_name": "champ_titre_annexe",
+      "instruction": "Titre de la page"
+     },
+     {
+      "role": "sous_titre_annexe",
+      "shape_name": "champ_sous_titre_annexe",
+      "instruction": "Sous-titre / kicker de chapitre"
+     },
+     {
+      "role": "kpi1_valeur",
+      "shape_name": "champ_kpi1_valeur",
+      "instruction": "Tuile KPI 1 : valeur courte (ex '1 369'), eventuellement + un libelle en 2e paragraphe"
+     },
+     {
+      "role": "kpi2_valeur",
+      "shape_name": "champ_kpi2_valeur",
+      "instruction": "Tuile KPI 2"
+     },
+     {
+      "role": "kpi3_valeur",
+      "shape_name": "champ_kpi3_valeur",
+      "instruction": "Tuile KPI 3"
+     },
+     {
+      "role": "bloc1_titre",
+      "shape_name": "champ_bloc1_titre",
+      "instruction": "En-tete du bloc de texte 1 (bas gauche)"
+     },
+     {
+      "role": "bloc1_texte",
+      "shape_name": "champ_bloc1_texte",
+      "instruction": "Corps du bloc 1, imbrique dans un Groupe"
+     },
+     {
+      "role": "bloc2_titre",
+      "shape_name": "champ_bloc2_titre",
+      "instruction": "En-tete du bloc de texte 2 (bas milieu)"
+     },
+     {
+      "role": "bloc2_texte",
+      "shape_name": "champ_bloc2_texte",
+      "instruction": "Corps du bloc 2"
+     },
+     {
+      "role": "bloc3_titre",
+      "shape_name": "champ_bloc3_titre",
+      "instruction": "En-tete du bloc de texte 3 (colonne droite, pleine hauteur)"
+     },
+     {
+      "role": "bloc3_texte",
+      "shape_name": "champ_bloc3_texte",
+      "instruction": "Corps du bloc 3"
+     }
+    ],
+    "note": "Page la plus riche du jeu : 3 tuiles KPI en haut, 3 blocs de texte avec en-tete, 1 visuel. Les anciens champs champ_texte_kpi1/2/3 etaient MAL nommes : ils designaient les en-tetes des blocs de texte, pas les tuiles KPI. Corrige le 17/08/2026."
+   }
+  },
+  {
+   "tag": "annexe_schema",
+   "jeu": "B",
+   "pages_canva": [
+    52
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Annexe : schéma illustratif + 3 points de texte",
+   "pptx": {
+    "pptx_slide": 79,
+    "methode": "renommage de formes (shape.name)",
+    "champs": [
+     {
+      "role": "titre_annexe",
+      "shape_name": "champ_titre_annexe"
+     }
+    ],
+    "note": "Slide majoritairement visuelle (schema/image) ; pas d'autre champ texte identifie a ce stade."
+   }
+  },
+  {
+   "tag": "reporting_flash",
+   "jeu": "C",
+   "pages_canva": [
+    53
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "Reporting flash de suivi de mission : réalisations, avancement chantiers (%), priorités, points d'attention",
+   "pptx": {
+    "pptx_slide": 80,
+    "methode": "renommage de formes (shape.name)",
+    "champs": [
+     {
+      "role": "date",
+      "shape_name": "champ_date"
+     },
+     {
+      "role": "bloc1_texte",
+      "shape_name": "champ_bloc1_texte",
+      "instruction": "Bloc 'Realisations' (voir visuel : coche verte + texte)"
+     },
+     {
+      "role": "bloc2_texte",
+      "shape_name": "champ_bloc2_texte",
+      "instruction": "Bloc 'Priorites'"
+     },
+     {
+      "role": "bloc3_texte",
+      "shape_name": "champ_bloc3_texte",
+      "instruction": "Bloc a confirmer visuellement (3e colonne, ex points d'attention)"
+     },
+     {
+      "role": "chantier1_nom",
+      "shape_name": "champ_chantier1_nom"
+     },
+     {
+      "role": "chantier1_avancement",
+      "shape_name": "champ_chantier1_avancement",
+      "instruction": "Pourcentage d'avancement, ex '45 %'"
+     },
+     {
+      "role": "chantier2_nom",
+      "shape_name": "champ_chantier2_nom"
+     },
+     {
+      "role": "chantier2_avancement",
+      "shape_name": "champ_chantier2_avancement"
+     },
+     {
+      "role": "chantier3_nom",
+      "shape_name": "champ_chantier3_nom"
+     },
+     {
+      "role": "chantier3_avancement",
+      "shape_name": "champ_chantier3_avancement"
+     },
+     {
+      "role": "chantier4_nom",
+      "shape_name": "champ_chantier4_nom"
+     },
+     {
+      "role": "chantier4_avancement",
+      "shape_name": "champ_chantier4_avancement"
+     }
+    ],
+    "note_import": "3 icones decoratives (format vectoriel EMF/WMF) n'ont pas pu etre reimportees depuis l'export Canva -> a rajouter manuellement dans PowerPoint si besoin visuel complet."
+   }
+  },
+  {
+   "tag": "etat_livrables",
+   "jeu": "C",
+   "pages_canva": [
+    54
+   ],
+   "variante_photo": false,
+   "champs_autofill": [],
+   "description": "État des lieux des livrables à date (page-cadre, contenu libre)",
+   "pptx": {
+    "pptx_slide": 81,
+    "methode": "renommage de formes (shape.name) applique dans TEMPLATE_ECOSYS_ANNOTE.pptx",
+    "layout": "Page vierge_1",
+    "champs": [
+     {
+      "role": "titre",
+      "shape_name": "champ_titre",
+      "instruction": "Titre (par defaut 'Etat des lieux des livrables')"
+     },
+     {
+      "role": "date",
+      "shape_name": "champ_date",
+      "instruction": "Date du point d'avancement"
+     },
+     {
+      "role": "tableau_livrables",
+      "shape_name": "champ_tableau_livrables",
+      "instruction": "Zone de tableau, imbriquee dans un Groupe. Une ligne par livrable : 1 <a:p> par ligne, format 'Livrable — statut — echeance'. Zone de 11,83 x 5,46 pouces, environ 10 lignes max"
+     }
+    ],
+    "note": "Slide de reporting de mission. Le tableau est une zone de texte libre et non un vrai tableau PowerPoint : si un vrai tableau est necessaire, l'inserer a la main apres generation."
+   }
+  }
+ ],
+ "exclusions": {
+  "meta": [
+   1,
+   2,
+   3
+  ],
+  "ressources": [
+   55,
+   56
+  ]
+ },
+ "blocs_reutilisables_corporate": [
+  {
+   "id": "argumentaire_ecosys",
+   "description": "Bloc standard 'Pourquoi Ecosys' : raison d'être, interopérabilité data/IA, 4 bénéfices méthodes ECOSYS, nos métiers",
+   "source_observee": "ECOSYS_-_PEMB_-_Proposition_commerciale (slides 32-35)"
+  },
+  {
+   "id": "methodologie_eic_mcd_mcdi",
+   "description": "Bloc méthodologique standard EIC® / Modèle Conceptuel de Données / MCD Instancié, présenté en 3 étapes",
+   "source_observee": "ECOSYS_-_PEMB_-_Proposition_commerciale (slides 36-38)"
+  },
+  {
+   "id": "vitrine_cas_clients_videos",
+   "description": "Vitrine de cas clients avec vidéos cliquables (fraude interne, politiques publiques, ports français, défense)",
+   "source_observee": "ECOSYS_-_PEMB_-_Proposition_commerciale (slide 39)"
+  }
+ ]
+}
